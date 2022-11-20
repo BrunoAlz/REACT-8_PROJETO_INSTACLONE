@@ -1,8 +1,8 @@
 const { validationResult } = require("express-validator");
 
-const validate = (request, response, next) => {
+const validate = (req, res, next) => {
   //  recupera o erros que vierem na requisição
-  const errors = validationResult(request);
+  const errors = validationResult(req);
 
   if (errors.isEmpty()) {
     return next();
@@ -14,7 +14,7 @@ const validate = (request, response, next) => {
   // Se forem recuperados erros da requisição faz o push para o Array
   errors.array().map((err) => extractedErros.push(err.msg));
 
-  return response.status(422).json({
+  return res.status(422).json({
     errors: extractedErros,
   });
 };
