@@ -43,6 +43,7 @@ const register = async (req, res) => {
     return;
   }
 
+  // Retorna o usuário com o Token
   res.status(201).json({
     _id: newUser._id,
     token: generateToken(newUser._id),
@@ -50,8 +51,27 @@ const register = async (req, res) => {
 };
 
 // Logar o usuário
-const login = (req, res) => {
-  res.send("Login");
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(404).json({ erros: ["Usuário não encontrado"] });
+    return;
+  }
+
+  // Verifica se as senhas do usuários são iguais
+  if (!(await bcrypt.compare(password, user.password))) {
+    res.status(422).json({ erros: ["Senha Inválida"] });
+    return;
+  }
+
+  res.status(201).json({
+    _id: user._id,
+    profileImage: user.profileImage,
+    token: generateToken(user._id),
+  });
 };
 
 module.exports = {
