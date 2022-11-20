@@ -74,7 +74,15 @@ const login = async (req, res) => {
   });
 };
 
+// Recupera o usuario logado atualmente
+const getCurrentUser = async (req, res) => {
+  const user = req.user;
+
+  res.status(200).json(user);
+};
+
 module.exports = {
   register,
   login,
+  getCurrentUser,
 };
