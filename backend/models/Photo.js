@@ -16,4 +16,4 @@ const PhotoSchema = new Schema(
 
 // Criando o model no MongoDB
 const Photo = mongoose.model("Photo", PhotoSchema);
-module.exports = PhotoSchema;
+module.exports = Photo;
