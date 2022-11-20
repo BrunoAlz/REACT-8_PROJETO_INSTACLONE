@@ -1,2 +1,6 @@
 # REACT-8_PROJETO_INSTACLONE
- Projeto de Rede Social, baseada no Instagram, Ultilizando React, Redux, NodeJs, Express, MongoDB, Mongoose
+
+ ### Projeto de Rede Social, utilizando conceitos básicos do Instagram.
+ 
+ #### Sistema desenvolvido utilizando 
+ React, Redux, NodeJs, Express, Express-validator, BCryptJS, JsonWebToken, MongoDB, Mongoose, Multer
