@@ -11,7 +11,7 @@ const photoInsertValidation = () => {
       .isLength({ min: 10 })
       .withMessage("O Título deve conter no mínimo 10 caracteres."),
     body("image").custom((value, { req }) => {
-      if (req.file) {
+      if (!req.file) {
         throw new Error("A Imagem é Obrigatória.");
       }
       return true;
@@ -19,4 +19,4 @@ const photoInsertValidation = () => {
   ];
 };
 
-module.exports = photoInsertValidation;
+module.exports = {photoInsertValidation};
