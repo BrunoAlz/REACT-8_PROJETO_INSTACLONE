@@ -22,9 +22,27 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+// Login user
+const login = async (data) => {
+  const config = requestConfig("POST", data);
+
+  try {
+    const res = await fetch(api + "user/login", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    if (res) {
+      localStorage.setItem("user", JSON.stringify(res));
+    }
+
+    return res;
+  } catch (error) {}
+};
+
 const authService = {
   register,
   logout,
+  login,
 };
 
 export default authService;
