@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <nav id="nav">
-      <Link to="/">InstaClone</Link>
+      <Link to="/"><span>InstaClone</span></Link>
       <form id="search-form">
         <BsSearch />
         <input type="text" placeholder="Pesquisar..." />
