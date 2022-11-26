@@ -1,6 +1,8 @@
 export const api = "http://localhost:5000/api";
 export const uploads = "http://localhost:5000/uploads";
 
+// Configuração para as requisições HTTP
+
 export const requestConfig = (method, data, token = null, image = null) => {
   let config;
 
@@ -23,8 +25,9 @@ export const requestConfig = (method, data, token = null, image = null) => {
     };
   }
 
-  if(token){
-    config.headers.Authorization
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
 
+  return config;
 };

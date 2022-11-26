@@ -17,3 +17,9 @@ const register = async (data) => {
     console.log(error);
   }
 };
+
+const authService = {
+  register,
+};
+
+export default authService;
