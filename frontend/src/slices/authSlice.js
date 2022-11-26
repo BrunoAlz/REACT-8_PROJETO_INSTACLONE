@@ -26,7 +26,11 @@ export const register = createAsyncThunk(
   }
 );
 
-export const autSlice = createSlice({
+export const logout = createAsyncThunk("auth/logout", async () => {
+  await authService.logout();
+});
+
+export const authSlice = createSlice({
   name: "auth",
   initialState,
   redurcers: {
@@ -53,9 +57,15 @@ export const autSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
         state.user = null;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = null;
+        state.user = null;
       });
   },
 });
 
-export const { reset } = autSlice.actions;
-export default autSlice.reducer;
+export const { reset } = authSlice.actions;
+export default authSlice.reducer;

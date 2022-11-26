@@ -14,14 +14,17 @@ const register = async (data) => {
       localStorage.setItem("user", JSON.stringify(res));
     }
     return res;
-    
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
+};
+
+// logout user
+const logout = () => {
+  localStorage.removeItem("user");
 };
 
 const authService = {
   register,
+  logout,
 };
 
 export default authService;
