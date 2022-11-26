@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./Navbar.css";
 
 import { NavLink, Link } from "react-router-dom";

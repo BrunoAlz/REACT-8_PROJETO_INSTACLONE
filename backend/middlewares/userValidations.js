@@ -17,7 +17,7 @@ const userCreateValidation = () => {
       .withMessage("A Senha é Obrigatória")
       .isLength({ min: 8 })
       .withMessage("A Senha deve possuir no mínimo 8 caracteres"),
-    body("confirmpassword")
+    body("confirmPassword")
       .isString()
       .withMessage("A confirmação de Senha é Obrigatória")
       // Recebe um valor e compara com o password da requisição, se for igual volta true, se lança o erro
