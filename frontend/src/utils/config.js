@@ -1,4 +1,4 @@
-export const api = "http://localhost:5000/api";
+export const endpoint = "http://localhost:5000/api";
 export const uploads = "http://localhost:5000/uploads";
 
 // Configuração para as requisições HTTP
