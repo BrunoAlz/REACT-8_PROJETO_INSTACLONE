@@ -21,7 +21,7 @@ const register = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user) {
-    res.status(442).json({ erros: ["Por favor, utilize outro E-mail"] });
+    res.status(442).json({ errors: ["Por favor, utilize outro E-mail"] });
     return;
   }
 
@@ -40,7 +40,7 @@ const register = async (req, res) => {
   if (!newUser) {
     res
       .status(422)
-      .json({ erros: ["Houve um erro, por favor tente mais tarde."] });
+      .json({ errors: ["Houve um erro, por favor tente mais tarde."] });
     return;
   }
 
@@ -58,13 +58,13 @@ const login = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    res.status(404).json({ erros: ["Usuário não encontrado"] });
+    res.status(404).json({ errors: ["Usuário não encontrado"] });
     return;
   }
 
   // Verifica se as senhas do usuários são iguais
   if (!(await bcrypt.compare(password, user.password))) {
-    res.status(422).json({ erros: ["Senha Inválida"] });
+    res.status(422).json({ errors: ["Senha Inválida"] });
     return;
   }
 
@@ -131,13 +131,13 @@ const getUserById = async (req, res) => {
     );
 
     if (!user) {
-      res.status(404).json({ erros: ["Usuário não encontrado"] });
+      res.status(404).json({ errors: ["Usuário não encontrado"] });
       return;
     }
 
     res.status(200).json(user);
   } catch (error) {
-    res.status(404).json({ erros: ["Usuário não encontrado"] });
+    res.status(404).json({ errors: ["Usuário não encontrado"] });
     return;
   }
 };

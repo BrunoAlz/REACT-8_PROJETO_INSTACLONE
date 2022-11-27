@@ -32,15 +32,13 @@ const Register = () => {
       confirmPassword,
     };
 
-    console.log(user);
-
     dispatch(register(user));
   };
 
   // sempre que houver um dispatch, o useEffect que estará monitorando irá fazer o reset dos estados do Auth
-  // useEffect(() => {
-  //   dispatch(reset());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(reset());
+  }, [dispatch]);
 
   return (
     <div id="register">

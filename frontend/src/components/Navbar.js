@@ -7,7 +7,7 @@ import {
   BsHouseDoorFill,
   BsFillPersonFill,
   BsFillCameraFill,
-  BsCamera2
+  BsCamera2,
 } from "react-icons/bs";
 
 // Hooks
@@ -35,7 +35,9 @@ const Navbar = () => {
 
   return (
     <nav id="nav">
-      <Link to="/"><BsCamera2 /> <span>InstaClone</span></Link>
+      <Link to="/">
+        <BsCamera2 /> <span className="brand">InstaClone</span>
+      </Link>
       <form id="search-form">
         <BsSearch />
         <input type="text" placeholder="Pesquisar..." />

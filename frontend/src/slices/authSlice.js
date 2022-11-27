@@ -44,7 +44,7 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  redurcers: {
+  reducers: {
     reset: (state) => {
       state.loading = false;
       state.error = false;
