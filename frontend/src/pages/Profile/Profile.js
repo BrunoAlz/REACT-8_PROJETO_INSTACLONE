@@ -8,11 +8,15 @@ import { uploads } from "../../utils/config";
 // Hooks
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // Redux
 import { getUserProfileDetails } from "../../slices/userSlice";
-import { publishPhoto, resetMessage } from "../../slices/photoSlice";
+import {
+  publishPhoto,
+  resetMessage,
+  getUserPhotos,
+} from "../../slices/photoSlice";
 
 // Components
 import Message from "../../components/Message";
@@ -76,6 +80,7 @@ const Profile = () => {
   // load user data
   useEffect(() => {
     dispatch(getUserProfileDetails(id));
+    dispatch(getUserPhotos(id));
   }, [dispatch, id]);
 
   if (loading) {
@@ -126,6 +131,31 @@ const Profile = () => {
           {messagePhoto && <Message msg={messagePhoto} type="success" />}
         </>
       ) : null}
+      <div className="user-photos">
+        <h2>Fotos Publicadas: </h2>
+        <div className="photos-container">
+          {photos
+            ? photos.map((photo) => (
+                <div className="photo" key={photo._id}>
+                  {photo.image && (
+                    <img
+                      src={`${uploads}/photos/${photo.image}`}
+                      alt={photo.title}
+                    />
+                  )}
+                  {id === userAuth._id ? (
+                    <p>Actions</p>
+                  ) : (
+                    <Link className="btn" to={`/photos/${photos._id}`}>
+                      Ver
+                    </Link>
+                  )}
+                </div>
+              ))
+            : null}
+          {photos.length === 0 ? <p>Nenhuma Postagem publicada :/ </p> : null}
+        </div>
+      </div>
     </div>
   );
 };
