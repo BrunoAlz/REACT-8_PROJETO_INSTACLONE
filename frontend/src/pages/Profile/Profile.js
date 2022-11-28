@@ -5,7 +5,7 @@ import "./Profile.css";
 import { uploads } from "../../utils/config";
 
 // Hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -28,7 +28,13 @@ const Profile = () => {
   // Auth User
   const { user: userAuth } = useSelector((state) => state.auth);
 
-  // Photo
+  // New form and edit form refs
+  const newPhotoForm = useRef();
+  const editPhotoForm = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   // load user data
   useEffect(() => {
@@ -50,6 +56,24 @@ const Profile = () => {
           <p>{user.bio}</p>
         </div>
       </div>
+      {id === userAuth._id ? (
+        <>
+          <div className="new-photo" ref={newPhotoForm}>
+            <h3>Compartilhe algum momento:</h3>
+            <form onSubmit={handleSubmit}>
+              <label>
+                <span>Título para a foto:</span>
+                <input type="text" placeholder="Insira o título" />
+              </label>
+              <label>
+                <span>Imagem:</span>
+                <input type="file" placeholder="Insira o título" />
+              </label>
+              <input type="submit" value="Postar!" />
+            </form>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };
