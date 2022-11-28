@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+// CSS
 import "./Profile.css";
 
 // Utils
@@ -11,6 +12,7 @@ import { useParams } from "react-router-dom";
 
 // Redux
 import { getUserProfileDetails } from "../../slices/userSlice";
+import { publishPhoto, resetMessage } from "../../slices/photoSlice";
 
 // Components
 import Message from "../../components/Message";
@@ -28,12 +30,47 @@ const Profile = () => {
   // Auth User
   const { user: userAuth } = useSelector((state) => state.auth);
 
+  const {
+    photos,
+    loading: loadingPhoto,
+    message: messagePhoto,
+    error: errorPhoto,
+  } = useSelector((state) => state.photo);
+
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+
   // New form and edit form refs
   const newPhotoForm = useRef();
   const editPhotoForm = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const photoData = {
+      title,
+      image,
+    };
+
+    // Build form data
+    const formData = new FormData();
+
+    Object.keys(photoData).forEach((key) =>
+      formData.append(key, photoData[key])
+    );
+
+    dispatch(publishPhoto(formData));
+    setTitle("");
+
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 2000);
+  };
+
+  const handleFile = (e) => {
+    // Image preview
+    const image = e.target.files[0];
+    setImage(image);
   };
 
   // load user data
@@ -63,15 +100,30 @@ const Profile = () => {
             <form onSubmit={handleSubmit}>
               <label>
                 <span>Título para a foto:</span>
-                <input type="text" placeholder="Insira o título" />
+                <input
+                  type="text"
+                  placeholder="Insira o título"
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title || ""}
+                />
               </label>
               <label>
                 <span>Imagem:</span>
-                <input type="file" placeholder="Insira o título" />
+                <input
+                  type="file"
+                  placeholder="Insira o título"
+                  onChange={handleFile}
+                />
               </label>
-              <input type="submit" value="Postar!" />
+              {!loadingPhoto ? (
+                <input type="submit" value="Postar!" />
+              ) : (
+                <input type="submit" value="Aguarde..." disabled />
+              )}
             </form>
           </div>
+          {errorPhoto && <Message msg={errorPhoto} type="error" />}
+          {messagePhoto && <Message msg={messagePhoto} type="success" />}
         </>
       ) : null}
     </div>
