@@ -16,12 +16,13 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Profile from "./pages/Profile/Profile";
+import Photo from "./pages/Photo/Photo";
 
 function App() {
   const { auth, loading } = useAuth();
 
   if (loading) {
-    return <p className="loader">Carregando...</p>
+    return <p className="loader">Carregando...</p>;
   }
 
   return (
@@ -50,6 +51,7 @@ function App() {
               path="/register"
               element={!auth ? <Register /> : <Navigate to="/" />}
             />
+          <Route path="photos/:id" element={<Photo />} />
           </Routes>
         </div>
         <Footer />
