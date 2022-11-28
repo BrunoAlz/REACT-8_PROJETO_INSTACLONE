@@ -35,9 +35,9 @@ const Profile = () => {
     dispatch(getUserProfileDetails(id));
   }, [dispatch, id]);
 
-  if (loading){
-    return <p className="loader">Carregando...</p>
-  }  
+  if (loading) {
+    return <p className="loader">Carregando...</p>;
+  }
 
   return (
     <div id="profile">
