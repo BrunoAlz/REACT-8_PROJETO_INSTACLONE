@@ -33,9 +33,15 @@
   margin: 0.3%;
 }
 
+
 .photo img {
   width: 100%;
 }
+
+.photo img:hover {
+    border: 1px solid #363636;
+}
+
 
 .actions {
   display: flex;
@@ -46,6 +52,10 @@
 .actions svg {
   cursor: pointer;
 }
+
+.actions svg:hover {
+    color: #707070;
+  }
 
 .edit-photo {
   margin-bottom: 1em;
