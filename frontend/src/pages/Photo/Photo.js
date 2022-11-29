@@ -4,6 +4,7 @@ import { uploads } from "../../utils/config";
 
 // components
 import { Link } from "react-router-dom";
+import PhotoItem from "../../components/PhotoItem";
 
 // hooks
 import { useEffect, useState } from "react";
@@ -32,7 +33,11 @@ const Photo = () => {
     return <p className="loader">Carregando...</p>;
   }
 
-  return <div>Photo</div>;
+  return (
+    <div id="photo">
+      <PhotoItem photo={photo[0]} />
+    </div>
+  );
 };
 
 export default Photo;

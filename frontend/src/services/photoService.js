@@ -28,8 +28,9 @@ const getUserPhotos = async (id, token) => {
 };
 
 // Get photo
-const getPhoto = async (id, token) => {
-  const config = requestConfig("GET", null, token);
+// Get photo
+const getPhoto = async (id) => {
+  const config = requestConfig("GET");
 
   try {
     const res = await fetch(endpoint + "/photos/" + id, config)
